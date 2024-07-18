@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { Container, ContainerModule, interfaces } from "inversify";
 import { App } from "./app";
 import { ExeptionFilter } from "./errors/exeption.filter";

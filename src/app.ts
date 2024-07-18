@@ -1,5 +1,5 @@
-import express, { Express } from "express";
-
+import { Express } from "express";
+const { default: express } = await import("express");
 import { Server } from "http";
 import { UserController } from "./users/users.controller";
 import { ExeptionFilter } from "./errors/exeption.filter";
