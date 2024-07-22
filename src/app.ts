@@ -8,6 +8,8 @@ import { ILogger } from "./logger/logger.interface.js";
 import { TYPES } from "./types.js";
 import { ExeptionFilter } from "./errors/exeption.filter.js";
 
+const { default: bodyParser } = await import("body-parser");
+
 @injectable()
 export class App {
   app: Express;
@@ -30,6 +32,10 @@ export class App {
     this.exeptionFilter = exeptionFilter;
   }
 
+  useMiddleware() {
+    this.app.use(bodyParser.json());
+  }
+
   useRoutes() {
     this.app.use("/users", this.userController.router);
   }
@@ -39,6 +45,7 @@ export class App {
   }
 
   public async init() {
+    this.useMiddleware();
     this.useRoutes();
     this.useExeptionFilters();
     this.server = this.app.listen(this.port);
