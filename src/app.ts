@@ -1,12 +1,12 @@
 import { Express } from "express";
 const { default: express } = await import("express");
 import { Server } from "http";
-import { UserController } from "./users/users.controller";
-import { ExeptionFilter } from "./errors/exeption.filter";
-import { ILogger } from "./logger/logger.interface";
 import { inject, injectable } from "inversify";
-import { TYPES } from "./types";
 import "reflect-metadata";
+import { UserController } from "./users/users.controller.js";
+import { ILogger } from "./logger/logger.interface.js";
+import { TYPES } from "./types.js";
+import { ExeptionFilter } from "./errors/exeption.filter.js";
 
 @injectable()
 export class App {

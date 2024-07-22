@@ -1,13 +1,14 @@
 import "reflect-metadata";
 
 import { Container, ContainerModule, interfaces } from "inversify";
-import { App } from "./app";
-import { ExeptionFilter } from "./errors/exeption.filter";
-import { LoggerService } from "./logger/logger.service";
-import { UserController } from "./users/users.controller";
-import { ILogger } from "./logger/logger.interface";
-import { TYPES } from "./types";
-import { IExeptionFilter } from "./errors/exeption.filter.interface";
+
+import { ILogger } from "./logger/logger.interface.js";
+import { LoggerService } from "./logger/logger.service.js";
+import { ExeptionFilter } from "./errors/exeption.filter.js";
+import { TYPES } from "./types.js";
+import { UserController } from "./users/users.controller.js";
+import { App } from "./app.js";
+import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.ILogger).to(LoggerService);

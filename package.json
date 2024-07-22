@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon",
+    "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9229 -r ts-node/register src/main.ts",
     "start": "node dist/main.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
