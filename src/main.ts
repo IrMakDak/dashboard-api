@@ -9,11 +9,15 @@ import { TYPES } from "./types.js";
 import { UserController } from "./users/users.controller.js";
 import { App } from "./app.js";
 import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
+import { UserService } from "./users/users.service.js";
+import { IUserService } from "./users/users.service.interface.js";
+import { IUserController } from "./users/users.controller.interface.js";
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.ILogger).to(LoggerService);
+  bind<IUserService>(TYPES.UserService).to(UserService);
   bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
-  bind<UserController>(TYPES.UserController).to(UserController);
+  bind<IUserController>(TYPES.UserController).to(UserController);
   bind<App>(TYPES.Application).to(App);
 });
 
