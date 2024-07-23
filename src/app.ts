@@ -7,6 +7,10 @@ import { UserController } from "./users/users.controller.js";
 import { ILogger } from "./logger/logger.interface.js";
 import { TYPES } from "./types.js";
 import { ExeptionFilter } from "./errors/exeption.filter.js";
+import { ConfigService } from "./config/config.service.js";
+import { IUserController } from "./users/users.controller.interface.js";
+import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
+import { IConfigService } from "./config/config.service.interface.js";
 
 const { default: bodyParser } = await import("body-parser");
 
@@ -17,12 +21,14 @@ export class App {
   server: Server;
   private logger: ILogger;
   private userController: UserController;
-  private exeptionFilter: ExeptionFilter;
+  private exeptionFilter: IExeptionFilter;
+  private configService: IConfigService;
 
   constructor(
     @inject(TYPES.ILogger) logger: ILogger,
     @inject(TYPES.UserController) userController: UserController,
-    @inject(TYPES.ExeptionFilter) exeptionFilter: ExeptionFilter
+    @inject(TYPES.ExeptionFilter) exeptionFilter: IExeptionFilter,
+    @inject(TYPES.ConfigService) configService: IConfigService
   ) {
     this.userController = userController;
     this.app = express();
@@ -30,6 +36,7 @@ export class App {
     this.logger = logger;
     this.server = new Server();
     this.exeptionFilter = exeptionFilter;
+    this.configService = configService;
   }
 
   useMiddleware() {
