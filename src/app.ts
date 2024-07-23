@@ -11,6 +11,7 @@ import { ConfigService } from "./config/config.service.js";
 import { IUserController } from "./users/users.controller.interface.js";
 import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
 import { IConfigService } from "./config/config.service.interface.js";
+import { PrismaService } from "./database/prisma.service.js";
 
 const { default: bodyParser } = await import("body-parser");
 
@@ -23,12 +24,14 @@ export class App {
   private userController: UserController;
   private exeptionFilter: IExeptionFilter;
   private configService: IConfigService;
+  private prismaService: PrismaService;
 
   constructor(
     @inject(TYPES.ILogger) logger: ILogger,
     @inject(TYPES.UserController) userController: UserController,
     @inject(TYPES.ExeptionFilter) exeptionFilter: IExeptionFilter,
-    @inject(TYPES.ConfigService) configService: IConfigService
+    @inject(TYPES.ConfigService) configService: IConfigService,
+    @inject(TYPES.PrismaService) prismaServise: PrismaService
   ) {
     this.userController = userController;
     this.app = express();
@@ -37,6 +40,7 @@ export class App {
     this.server = new Server();
     this.exeptionFilter = exeptionFilter;
     this.configService = configService;
+    this.prismaService = prismaServise;
   }
 
   useMiddleware() {
@@ -55,6 +59,7 @@ export class App {
     this.useMiddleware();
     this.useRoutes();
     this.useExeptionFilters();
+    await this.prismaService.connect();
     this.server = this.app.listen(this.port);
     this.logger.log(`Server started at http://localhost:${this.port}`);
   }

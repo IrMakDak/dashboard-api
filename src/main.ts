@@ -14,10 +14,12 @@ import { IUserService } from "./users/users.service.interface.js";
 import { IUserController } from "./users/users.controller.interface.js";
 import { IConfigService } from "./config/config.service.interface.js";
 import { ConfigService } from "./config/config.service.js";
+import { PrismaService } from "./database/prisma.service.js";
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
   bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
+  bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
   bind<IConfigService>(TYPES.ConfigService)
     .to(ConfigService)
     .inSingletonScope();

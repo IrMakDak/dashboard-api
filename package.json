@@ -8,12 +8,14 @@
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9229 -r ts-node/register src/main.ts",
     "start": "node dist/main.js",
     "build": "tsc",
+    "generate": "npx prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "xi_mkd",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.17.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "class-transformer": "^0.5.1",
@@ -30,6 +32,7 @@
     "eslint": "^9.6.0",
     "eslint-config-recommended": "^4.1.0",
     "nodemon": "^3.1.4",
+    "prisma": "^5.17.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2"
   }
