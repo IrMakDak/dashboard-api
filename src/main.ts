@@ -15,11 +15,15 @@ import { IUserController } from "./users/users.controller.interface.js";
 import { IConfigService } from "./config/config.service.interface.js";
 import { ConfigService } from "./config/config.service.js";
 import { PrismaService } from "./database/prisma.service.js";
+import { UsersRepository } from "./users/users.repository.js";
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
   bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
   bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+  bind<UsersRepository>(TYPES.UsersRepository)
+    .to(UsersRepository)
+    .inSingletonScope();
   bind<IConfigService>(TYPES.ConfigService)
     .to(ConfigService)
     .inSingletonScope();

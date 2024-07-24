@@ -6,12 +6,10 @@ import "reflect-metadata";
 import { UserController } from "./users/users.controller.js";
 import { ILogger } from "./logger/logger.interface.js";
 import { TYPES } from "./types.js";
-import { ExeptionFilter } from "./errors/exeption.filter.js";
-import { ConfigService } from "./config/config.service.js";
-import { IUserController } from "./users/users.controller.interface.js";
 import { IExeptionFilter } from "./errors/exeption.filter.interface.js";
 import { IConfigService } from "./config/config.service.interface.js";
 import { PrismaService } from "./database/prisma.service.js";
+import { UsersRepository } from "./users/users.repository.js";
 
 const { default: bodyParser } = await import("body-parser");
 
@@ -25,13 +23,15 @@ export class App {
   private exeptionFilter: IExeptionFilter;
   private configService: IConfigService;
   private prismaService: PrismaService;
+  private usersRepository: UsersRepository;
 
   constructor(
     @inject(TYPES.ILogger) logger: ILogger,
     @inject(TYPES.UserController) userController: UserController,
     @inject(TYPES.ExeptionFilter) exeptionFilter: IExeptionFilter,
     @inject(TYPES.ConfigService) configService: IConfigService,
-    @inject(TYPES.PrismaService) prismaServise: PrismaService
+    @inject(TYPES.PrismaService) prismaServise: PrismaService,
+    @inject(TYPES.UsersRepository) usersRepository: UsersRepository
   ) {
     this.userController = userController;
     this.app = express();
@@ -41,6 +41,7 @@ export class App {
     this.exeptionFilter = exeptionFilter;
     this.configService = configService;
     this.prismaService = prismaServise;
+    this.usersRepository = usersRepository;
   }
 
   useMiddleware() {

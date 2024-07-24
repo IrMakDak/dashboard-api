@@ -1,5 +1,3 @@
-import { PrismaService } from "./database/prisma.service.js";
-
 export const TYPES = {
   Application: Symbol.for("Application"),
   ILogger: Symbol.for("Logger"),
@@ -8,4 +6,5 @@ export const TYPES = {
   ExeptionFilter: Symbol.for("ExeptionFilter"),
   ConfigService: Symbol.for("ConfigService"),
   PrismaService: Symbol.for("PrismaService"),
+  UsersRepository: Symbol.for("UsersRepository"),
 };
